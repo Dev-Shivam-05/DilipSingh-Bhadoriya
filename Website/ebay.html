@@ -1,0 +1,597 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   eBay Clone
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+        header a {
+            text-decoration: none;
+            color: #0064d2;
+            margin: 0 10px;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 40px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+        .search-bar input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+        }
+        .search-bar select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-left: 0;
+            border-radius: 0;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            border: 1px solid #0064d2;
+            background-color: #0064d2;
+            color: #fff;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: #005bb5;
+        }
+        .main-banner {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .main-banner img {
+            max-width: 100%;
+            height: auto;
+        }
+        .main-banner h2 {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .main-banner p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .main-banner button {
+            padding: 10px 20px;
+            border: 1px solid #fff;
+            background-color: #fff;
+            color: #000;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .main-banner button:hover {
+            background-color: #f5f5f5;
+        }
+        .promo-banner {
+            background-color: #0073e6;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .promo-banner h3 {
+            font-size: 20px;
+            margin: 0;
+        }
+        .promo-banner button {
+            padding: 10px 20px;
+            border: 1px solid #fff;
+            background-color: #fff;
+            color: #0073e6;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .promo-banner button:hover {
+            background-color: #f5f5f5;
+        }
+        .trending-kicks {
+            text-align: center;
+            padding: 20px;
+        }
+        .trending-kicks h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .trending-kicks .kicks-list {
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+        }
+        .trending-kicks .kicks-list .kick-item {
+            background-color: #fff;
+            border-radius: 50%;
+            padding: 20px;
+            margin: 0 10px;
+            text-align: center;
+            flex: 0 0 auto;
+        }
+        .trending-kicks .kicks-list .kick-item img {
+            max-width: 100px;
+            height: auto;
+            border-radius: 50%;
+        }
+        .trending-kicks .kicks-list .kick-item p {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .section {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .section img {
+            max-width: 200px;
+            height: auto;
+        }
+        .section .text {
+            max-width: 60%;
+        }
+        .section .text h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .section .text p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .section .text button {
+            padding: 10px 20px;
+            border: 1px solid #000;
+            background-color: #000;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .section .text button:hover {
+            background-color: #333;
+        }
+        footer {
+            background-color: #fff;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+        }
+        footer .footer-links {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        footer .footer-links div {
+            flex: 1;
+            margin: 10px;
+        }
+        footer .footer-links div h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        footer .footer-links div ul {
+            list-style: none;
+            padding: 0;
+        }
+        footer .footer-links div ul li {
+            margin-bottom: 5px;
+        }
+        footer .footer-links div ul li a {
+            text-decoration: none;
+            color: #000;
+        }
+        footer .footer-links div ul li a:hover {
+            text-decoration: underline;
+        }
+        footer .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+  </style>
+ </head>
+ <body>
+  <header>
+   <div class="logo">
+    <img alt="eBay Logo" src="./media/image-removebg-preview.png">
+   </div>
+   <nav>
+    <a href="./app.html">
+     Hi! Sign in or register
+    </a>
+    <a href="./app2.html">
+     Daily Deals
+    </a>
+    <a href="./appp3.html">
+     Brand Outlet
+    </a>
+    <a href="./doct-3.html">
+     Gift Cards
+    </a>
+    <a href="./doct.html">
+     Help &amp; Contact
+    </a>
+    <a href="./doct2.html">
+     Sell
+    </a>
+    <a href="./doct2.html">
+     Watchlist
+    </a>
+    <a href="#">
+     My eBay
+    </a>
+   </nav>
+   <div class="search-bar">
+    <input placeholder="Search for anything" type="text"/>
+    <select>
+     <option>
+      All Categories
+     </option>
+    </select>
+    <button>
+     Search
+    </button>
+   </div>
+  </header>
+  <div class="main-banner">
+   <img alt="McLaren F1 Car" src="./media/image-removebg-preview (2).png">
+   <h2>
+    Official Partner of McLaren F1
+   </h2>
+   <p>
+    Give your ride the pit stop experience with world-class parts.
+   </p>
+   <button>
+    Shop Now
+   </button>
+  </div>
+  <div class="promo-banner">
+   <h3>
+    Epic cards for every sport
+   </h3>
+   <p>
+    Grow your collection with these legendary finds.
+   </p>
+   <button>
+    Shop Now
+   </button>
+  </div>
+  <div class="trending-kicks">
+   <h3>
+    Score these trending kicks
+   </h3>
+   <div class="kicks-list">
+    <div class="kick-item">
+     <img alt="Travis Scott x Jordan 1 Retro Low Canary WMNS" height="100" src="https://storage.googleapis.com/a1aa/image/dgO6xhRAZva9MBG0jZAfadIDbL1vX6kSMPRCIpS7r5xNQH6JA.jpg" width="100"/0>
+     <p>
+      Travis Scott x Jordan 1 Retro Low Canary WMNS
+     </p>
+    </div>
+    <div class="kick-item">
+     <img alt="Nike Air DT Max '96 2024 Black White" src="./media/image-removebg-preview (1).png"/>
+     <p>
+      Nike Air DT Max '96 2024 Black White
+     </p>
+    </div>
+    <div class="kick-item">
+     <img alt="Jordan 3 x Nina Chanel Abney x Biocastal WMNS" src="./media/image-removebg-previe.png"/>
+     <p>
+      Jordan 3 x Nina Chanel Abney x Biocastal WMNS
+     </p>
+    </div>
+    <div class="kick-item">
+     <img alt="Jordan 4 Retro Military Blue 2024" height="100" src="https://storage.googleapis.com/a1aa/image/0mxkDE9gD3akMRSYMtqXRKGWHs4z6b1peVVUuabcoukPQH6JA.jpg" width="100"/>
+     <p>
+      Jordan 4 Retro Military Blue 2024
+     </p>
+    </div>
+    <div class="kick-item">
+     <img alt="Jordan 4 Low Bred Reimagined" height="100" src="https://storage.googleapis.com/a1aa/image/XIi5dfTEJIS6OSuYEulOXSU0XCDF7ON5TOzVFDcwia9LQH6JA.jpg" width="100"/>
+     <p>
+      Jordan 4 Low Bred Reimagined
+     </p>
+    </div>
+    <div class="kick-item">
+     <img alt="Jordan 4 Retro Oxidized Green" height="100" src="https://storage.googleapis.com/a1aa/image/u0oXafcFNqy0GaCCZCkIyupbM2HNr3KABFkijzrBcwtMQH6JA.jpg" width="100"/>
+     <p>
+      Jordan 4 Retro Oxidized Green
+     </p>
+    </div>
+   </div>
+  </div>
+  <div class="section">
+   <div class="text">
+    <h3>
+     Snag the sneakers of champions
+    </h3>
+    <p>
+     They wore them to win, now you can too.
+    </p>
+    <button>
+     Collect yours now
+    </button>
+   </div>
+   <img alt="Sneakers Collection" height="100" src="https://storage.googleapis.com/a1aa/image/D4NvOIYEpirtNdyRzcQ02GZe6i4bwzRWiqcBMLFGdK1KQH6JA.jpg" width="200"/>
+  </div>
+  <div class="section">
+   <div class="text">
+    <h3>
+     Make space for you
+    </h3>
+    <p>
+     Give your home a personal touch with products you'll adore.
+    </p>
+    <button>
+     Shop now
+    </button>
+   </div>
+   <img alt="Home Decor" height="100" src="https://storage.googleapis.com/a1aa/image/fc63Bg0ILiW6PSAMJkve9EfUjV7oefEd0ebWeiHvhjQsOQH6JA.jpg" width="200"/>
+  </div>
+  <footer>
+   <div class="footer-links">
+    <div>
+     <h4>
+      Buy
+     </h4>
+     <ul>
+      <li>
+       <a href="#">
+        Registration
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        eBay Money Back Guarantee
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Bidding &amp; buying help
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Stores
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div>
+     <h4>
+      Sell
+     </h4>
+     <ul>
+      <li>
+       <a href="#">
+        Start selling
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Learn to sell
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Affiliates
+       </a>
+      </li>
+     </ul>0
+    </div>
+    <div>
+     <h4>
+      Tools &amp; apps
+     </h4>
+     <ul>
+      <li>
+       <a href="#">
+        Developers
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Security center
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Site map
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div>
+     <h4>
+      Stay connected
+     </h4>
+     <ul>
+      <li>
+       <a href="#">
+        eBay's Blogs
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Facebook
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Twitter
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div>
+     <h4>
+      About eBay
+     </h4>
+     <ul>
+      <li>
+       <a href="#">
+        Company info
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        News
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Investors
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Careers
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Government relations
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Advertise with us
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Policies
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Verified Rights Owner (VeRO) Program
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div>
+     <h4>
+      Help &amp; Contact
+     </h4>
+     <ul>
+      <li>
+       <a href="#">
+        Seller Information Center
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Contact us
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div>
+     <h4>
+      Community
+     </h4>
+     <ul>
+      <li>
+       <a href="#">
+        Announcements
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        Discussion boards
+       </a>
+      </li>
+      <li>
+       <a href="#">
+        eBay Giving Works
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div>
+     <h4>
+      eBay Sites
+     </h4>
+     <ul>
+      <li>
+       <a href="#">
+        United States
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>
+     Copyright © 1995-2024 eBay Inc. All Rights Reserved.
+     <a href="#">
+      Accessibility
+     </a>
+     ,
+     <a href="#">
+      User Agreement
+     </a>
+     ,
+     <a href="#">
+      Privacy
+     </a>
+     ,
+     <a href="#">
+      Consumer Health Data
+     </a>
+     ,
+     <a href="#">
+      Payments Terms of Use
+     </a>
+     ,
+     <a href="#">
+      Cookies
+     </a>
+     <a href="#">
+      CA Privacy Rights
+     </a>
+     ,
+     <a href="#">
+      Your Privacy Choices
+     </a>
+     and
+     <a href="#">
+      AdChoice
+     </a>
+    </p>
+   </div>
+  </footer>
+ </body>
+</html>

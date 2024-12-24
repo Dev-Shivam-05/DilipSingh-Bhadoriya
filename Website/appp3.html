@@ -1,0 +1,106 @@
+<html>
+<head>
+    <title>Settings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+        }
+        .header .time {
+            color: white;
+            font-size: 18px;
+        }
+        .header .close {
+            color: red;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .settings-title {
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+        .setting-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .setting-item label {
+            font-size: 24px;
+            margin-right: 20px;
+        }
+        .setting-item .icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .setting-item input[type="range"] {
+            width: 300px;
+        }
+        .graphics-quality {
+            display: flex;
+            align-items: center;
+        }
+        .graphics-quality .quality-option {
+            width: 40px;
+            height: 40px;
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .graphics-quality .quality-option:last-child {
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="time">1:05</div>
+        <div class="close"><i class="fas fa-times"></i></div>
+    </div>
+    <div class="container">
+        <div class="settings-title">SETTINGS</div>
+        <div class="setting-item">
+            <label for="music">Music</label>
+            <i class="fas fa-music icon"></i>
+            <input type="range" id="music" name="music">
+        </div>
+        <div class="setting-item">
+            <label for="sound-effect">Sound Effect</label>
+            <i class="fas fa-volume-up icon"></i>
+            <input type="range" id="sound-effect" name="sound-effect">
+        </div>
+        <div class="setting-item">
+            <label for="voice-over">Voice Over</label>
+            <i class="fas fa-microphone icon"></i>
+            <input type="range" id="voice-over" name="voice-over">
+        </div>
+        <div class="setting-item graphics-quality">
+            <label>Graphics Quality</label>
+            <div class="quality-option">L</div>
+            <div class="quality-option">M</div>
+            <div class="quality-option">H</div>
+            <div class="quality-option"></div>
+        </div>
+    </div>
+</body>
+</html>

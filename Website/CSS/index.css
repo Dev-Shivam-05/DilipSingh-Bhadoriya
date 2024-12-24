@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    /* background-image: url(../media/image-removebg-previe.png); */
+    /* background-color: ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; */
+    height: 80px;
+    width: 100%;
+    background: rgba( 255, 255, 255, 0.1 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 8px );
+    -webkit-backdrop-filter: blur( 8px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+nav{
+    padding: 24px;
+}
+h1{
+    float: left;
+}
+a{
+    float: right;
+    text-decoration: none;
+    margin-right: 100px;
+}
+section{
+    position: relative;
+}
+h2{
+    font-size: 42px;
+    margin-top: 250px;
+    margin-left: 160px;
+    font-family: "PT Serif", serif;
+    font-weight: 700;
+    font-style: italic;
+}
+p{
+    margin-top: 20px;
+    margin-left: 160px;
+}
+button{
+    height: 30px;
+    width: 100px;
+    border-radius: 10px;
+    margin-left: 160px;
+    margin-top: 12px;
+}
+button:hover{
+    background-color: aqua;
+}
+box{
+    background-color: aquamarine;
+}

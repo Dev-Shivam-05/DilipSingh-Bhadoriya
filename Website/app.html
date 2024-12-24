@@ -1,0 +1,119 @@
+<html>
+<head>
+    <style>
+        body {
+            
+            margin: 0;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .status-bar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 30px;
+            background-color: #808080;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .status-bar .time {
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            color: black;
+        }
+
+        .status-bar .icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .status-bar .icons i {
+            margin-left: 10px;
+            color: black;
+        }
+
+        .center-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .center-content svg {
+            width: 200px;
+            height: 200px;
+        }
+
+        .bottom-bar {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            background-color: black;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .bottom-bar .dot {
+            width: 10px;
+            height: 10px;
+            background-color: gray;
+            border-radius: 50%;
+        }
+
+        .bottom-bar .square {
+            width: 20px;
+            height: 20px;
+            background-color: gray;
+        }
+
+        .bottom-bar .triangle {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 20px solid gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <div class="time">1:05</div>
+        <div class="icons">
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+    <div class="center-content">
+        
+        <svg viewBox="0 0 100 100">
+            <path d="M50 10 Q60 20 70 10 T90 10" stroke="#ff00ff" stroke-width="2" fill="none"/>
+            <path d="M90 10 Q80 20 90 30 T90 50" stroke="#00ffff" stroke-width="2" fill="none"/>
+            <path d="M90 50 Q80 60 90 70 T90 90" stroke="#ffff00" stroke-width="2" fill="none"/>
+            <path d="M90 90 Q80 80 70 90 T50 90" stroke="#ff00ff" stroke-width="2" fill="none"/>
+            <path d="M50 90 Q40 80 30 90 T10 90" stroke="#00ffff" stroke-width="2" fill="none"/>
+            <path d="M10 90 Q20 80 10 70 T10 50" stroke="#ffff00" stroke-width="2" fill="none"/>
+            <path d="M10 50 Q20 40 10 30 T10 10" stroke="#ff00ff" stroke-width="2" fill="none"/>
+            <path d="M10 10 Q20 20 30 10 T50 10" stroke="#00ffff" stroke-width="2" fill="none"/>
+        </svg>
+        
+    </div>
+    <div class="bottom-bar">
+        <div class="square"></div>
+        <div class="dot"></div>
+        <div class="triangle"></div>
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <a href="./app2.html">Let's - Go</a>
+</body>
+</html>

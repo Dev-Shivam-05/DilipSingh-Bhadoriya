@@ -1,0 +1,113 @@
+<html>
+<head>
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0A0A3E;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+        .header .time {
+            font-size: 16px;
+        }
+        .header .icons {
+            display: flex;
+            gap: 10px;
+        }
+        .header .icons i {
+            font-size: 18px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            border-bottom: 1px solid #444;
+        }
+        .tabs div {
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+        .tabs .active {
+            font-weight: bold;
+            border-bottom: 2px solid white;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .content .cart-icon {
+            font-size: 100px;
+            margin-bottom: 20px;
+        }
+        .content .message {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .content .sub-message {
+            font-size: 16px;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+        .content .button {
+            background-color: white;
+            color: #0A0A3E;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            text-decoration: none;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #444;
+        }
+        .footer i {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="time">9:40</div>
+        <div class="icons">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+    <div class="tabs">
+        <div class="active">Your Cart</div>
+        <div>Saved</div>
+    </div>
+    <div class="content">
+        <i class="fas fa-shopping-cart cart-icon"></i>
+        <div class="message">Your shoping cart is empty</div>
+        <div class="sub-message">Looking for ideas?</div>
+        <a href="#" class="button">See Trending items</a>
+    </div>
+    <div class="footer">
+        <i class="fas fa-home"></i>
+        <i class="fas fa-heart"></i>
+        <i class="fas fa-bell"></i>
+        <i class="fas fa-user"></i>
+        <i class="fas fa-shopping-cart"></i>
+    </div>
+</body>
+</html>

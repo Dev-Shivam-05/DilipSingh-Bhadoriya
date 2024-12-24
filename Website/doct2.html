@@ -1,0 +1,179 @@
+<html>
+ <head>
+  <title>
+   Doctor Appointment
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: Arial, sans-serif;
+            background-color: #0A0A3E;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 25px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .search-bar input {
+            border: none;
+            outline: none;
+            flex: 1;
+            padding: 5px;
+            font-size: 16px;
+        }
+        .search-bar i {
+            color: black;
+            margin-right: 10px;
+        }
+        .categories {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .categories img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: white;
+            padding: 10px;
+        }
+        .appointment-box {
+            border: 2px dashed white;
+            border-radius: 15px;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .top-doctors {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .top-doctors h2 {
+            margin: 0;
+        }
+        .top-doctors a {
+            color: white;
+            text-decoration: none;
+        }
+        .doctor-card {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 10px;
+            color: black;
+        }
+        .doctor-card img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .doctor-card button {
+            margin-left: auto;
+            background-color: #0A0A3E;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            background-color: #0A0A3E;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer i {
+            color: white;
+            font-size: 24px;
+        }
+  </style>
+ </head>
+ <body>
+  <div class="container">
+   <div class="search-bar">
+    <i class="fas fa-search">
+    </i>
+    <input placeholder="Search" type="text"/>
+    <i class="fas fa-qrcode">
+    </i>
+   </div>
+   <div class="categories">
+    <img alt="Heart icon" height="50" src="https://storage.googleapis.com/a1aa/image/G7CaaA52kso2INEsXOoLDJavNl2Ujb3of33UEmrpynXmyH6JA.jpg" width="50"/>
+    <img alt="Lungs icon" height="50" src="https://storage.googleapis.com/a1aa/image/5rs3ZYTZp4q4J1mIxJlGot77yyfJEC5rSVl35aV7fFvElP0TA.jpg" width="50"/>
+    <img alt="Hand icon" height="50" src="https://storage.googleapis.com/a1aa/image/TkQkS4GtdaZRN1y2fB5V95lrDYe66ftwvWoXvQxSeE5CUeheE.jpg" width="50"/>
+    <img alt="Brain icon" height="50" src="https://storage.googleapis.com/a1aa/image/ScSrcHm5XpZjP5lDd2qlsrE1EWDfPiLvRYvvGuoKeBz8kP0TA.jpg" width="50"/>
+    <img alt="Tooth icon" height="50" src="https://storage.googleapis.com/a1aa/image/FMw6YPf7wIUAIK8MEtEmzRbKkjJpwTmFGnmnq4EnbuVnyH6JA.jpg" width="50"/>
+   </div>
+   <div class="appointment-box">
+    <p><a href="./doct-3.html">
+     Book Your Appointment Now
+    </a>
+    </p>
+   </div>
+   <div class="top-doctors">
+    <h2>
+     Top doctors for you
+    </h2>
+    <a href="#">
+     See all
+    </a>
+   </div>
+   <div class="doctor-card">
+    <img alt="Doctor Rakshita Singh" height="50" src="https://storage.googleapis.com/a1aa/image/VJz0I4EGCwajLdr6chLrUt0LxOflUpre4dNt4XFpLFRIlP0TA.jpg" width="50"/>
+    <p>
+     Dr. Rakshita Singh
+    </p>
+    <button>
+     Book
+    </button>
+   </div>
+   <div class="doctor-card">
+    <img alt="Doctor Dev Rathod" height="50" src="https://storage.googleapis.com/a1aa/image/LJUaeiYYMp1mWCh0kK7fEMHIE7bwMN5fKpoZeeYBCqF4o8heE.jpg" width="50"/>
+    <p>
+     Dr. Dev Rathod
+    </p>
+    <button>
+     Book
+    </button>
+   </div>
+   <div class="doctor-card">
+    <img alt="Doctor Piyush Desai" height="50" src="https://storage.googleapis.com/a1aa/image/Yl6dqWipr85rPpXeGsbcfCOIff0QqoC7xhjmPugVmYXqUeheE.jpg" width="50"/>
+    <p>
+     Dr. Piyush Desai
+    </p>
+    <button>
+     Book
+    </button>
+   </div>
+  </div>
+  <div class="footer">
+   <i class="fas fa-home">
+   </i>
+   <i class="fas fa-heart">
+   </i>
+   <i class="fas fa-bell">
+   </i>
+   <i class="fas fa-user">
+   </i>
+   <i class="fas fa-shopping-cart">
+   </i>
+  </div>
+ </body>
+</html>
