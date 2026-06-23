@@ -1,0 +1,48 @@
+{
+  "name": "website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest run",
+    "db:push": "prisma db push",
+    "db:seed": "node prisma/seed.mjs",
+    "images": "node scripts/prepare-images.mjs",
+    "setup": "prisma generate && prisma db push && node prisma/seed.mjs",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "framer-motion": "^12.42.2",
+    "next": "16.2.10",
+    "next-intl": "^4.13.1",
+    "qrcode": "^1.5.4",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@prisma/client": "^6.19.3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.10",
+    "prisma": "^6.19.3",
+    "sharp": "^0.35.3",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^4.1.9"
+  },
+  "allowScripts": {
+    "sharp@0.34.5": true,
+    "sharp@0.35.3": true,
+    "@prisma/client@6.19.3": true,
+    "@prisma/engines@6.19.3": true,
+    "prisma@6.19.3": true,
+    "unrs-resolver@1.12.2": true
+  }
+}
