@@ -1,0 +1,7 @@
+# Original photo dump — contains private family photos; only the curated,
+# processed images in website/public/images are published.
+Images/
+
+Temp/
+*.log
+.DS_Store

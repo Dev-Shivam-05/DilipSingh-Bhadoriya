@@ -1,0 +1,116 @@
+// Dilipsingh Bhadoriya — portfolio platform schema
+// Dev: SQLite. Prod: switch provider to "postgresql" + DATABASE_URL (Supabase/Neon). No other changes needed.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Listing {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  titleGu     String?
+  type        String // plot | bungalow | flat | commercial | rental
+  status      String   @default("available") // available | token | sold
+  price       Int // in rupees
+  areaSqft    Int?
+  locality    String
+  bedrooms    Int?
+  description String
+  descriptionGu String?
+  imageUrl    String?
+  featured    Boolean  @default(false)
+  isSample    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  inquiries   Inquiry[]
+}
+
+model Inquiry {
+  id        String   @id @default(cuid())
+  kind      String // property | lic | documents | civic | general | requirement
+  name      String
+  phone     String
+  message   String
+  meta      String? // JSON: budget, locality, plan, etc.
+  listing   Listing? @relation(fields: [listingId], references: [id], onDelete: SetNull)
+  listingId String?
+  handled   Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  locality  String?
+  service   String // property | lic | documents | civic
+  message   String
+  approved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model SevaRequest {
+  id        String   @id @default(cuid())
+  token     String   @unique // DSB-XXXX
+  name      String
+  phone     String
+  docType   String
+  details   String?
+  status    String   @default("received") // received | in_progress | ready | done
+  note      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CivicIssue {
+  id        String   @id @default(cuid())
+  token     String   @unique // WARD-XXXX
+  name      String
+  phone     String
+  category  String // streetlight | drainage | road | water | garbage | other
+  area      String
+  details   String
+  status    String   @default("received") // received | in_progress | resolved
+  note      String?
+  public    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ---------- First-party analytics (anonymous, consent-gated) ----------
+
+model VisitSession {
+  id         String   @id // client-generated uuid
+  device     String? // mobile | tablet | desktop
+  os         String?
+  browser    String?
+  language   String?
+  referrer   String?
+  utmSource  String?
+  utmMedium  String?
+  city       String? // from request geo headers if present (Vercel)
+  country    String?
+  screenW    Int?
+  createdAt  DateTime @default(now())
+  events     AnalyticsEvent[]
+}
+
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  session   VisitSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  sessionId String
+  type      String // pageview | section_view | section_dwell | scroll_depth | cta_click | calc_use | lead
+  path      String
+  locale    String?
+  name      String? // section id / cta id / calculator id
+  value     Int? // dwell ms / depth % etc.
+  createdAt DateTime @default(now())
+
+  @@index([type, createdAt])
+  @@index([path])
+}
