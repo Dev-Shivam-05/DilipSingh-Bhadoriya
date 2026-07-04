@@ -47,6 +47,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       template: `%s | ${site.name}`,
     },
     description: tagline,
+    verification: {
+      google: "FpMq1620MPw97ShOx5JxKpvxsk0ON2uvsx7jUCBk_Ks",
+    },
     alternates: {
       languages: { gu: "/", hi: "/hi", en: "/en", "x-default": "/" },
     },
