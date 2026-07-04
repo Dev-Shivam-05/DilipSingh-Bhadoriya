@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { guides, guideCategories } from "@/content/guides";
 import { Container, SectionHeading, Card } from "@/components/ui";
+import { Icon } from "@/components/ui/icons";
 import { SevaTracker } from "@/components/documents/SevaTracker";
 import type { Locale } from "@/i18n/routing";
 
@@ -25,7 +26,9 @@ export default async function DocumentsPage({ params }: { params: Promise<{ loca
     <>
       <section className="bg-gradient-to-br from-saffron-600 to-saffron-500 py-14 text-white">
         <Container>
-          <h1 className="font-display text-4xl font-bold sm:text-5xl">📄 {t("documents.title")}</h1>
+          <h1 className="flex items-center gap-4 font-display text-4xl font-bold sm:text-5xl">
+            <Icon name="fileText" className="h-11 w-11 shrink-0" /> {t("documents.title")}
+          </h1>
           <p className="mt-3 max-w-2xl text-lg opacity-95">{t("documents.sub")}</p>
         </Container>
       </section>
@@ -50,7 +53,9 @@ export default async function DocumentsPage({ params }: { params: Promise<{ loca
                       data-track-cta={`guide-${g.slug}`}
                       className="group flex items-start gap-4 rounded-2xl border border-ink-800/10 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-gold-400 hover:shadow-seal"
                     >
-                      <span className="text-3xl" aria-hidden>{g.emoji}</span>
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-saffron-100 text-saffron-600">
+                        <Icon name={g.icon} className="h-6 w-6" />
+                      </span>
                       <div>
                         <h4 className="font-semibold leading-snug text-ink-800 group-hover:text-gold-600">
                           {g.title[loc]}

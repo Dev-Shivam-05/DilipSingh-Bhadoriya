@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Seal } from "@/components/brand/Seal";
 import { AnchorButton, WhatsAppIcon } from "@/components/ui";
+import { Icon } from "@/components/ui/icons";
 import { site, wa } from "@/lib/site";
 import { ShareCardButton } from "./ShareCardButton";
 
@@ -42,10 +43,10 @@ export default async function CardPage({ params }: { params: Promise<{ locale: s
               <WhatsAppIcon /> WhatsApp
             </AnchorButton>
             <AnchorButton href={`tel:+${site.phone}`} variant="gold" data-track-cta="card-call">
-              📞 {site.phoneDisplay}
+              <Icon name="phone" className="h-4 w-4" /> {site.phoneDisplay}
             </AnchorButton>
             <AnchorButton href="/api/vcard" variant="outline" className="!border-paper/30 !text-paper hover:!border-gold-400" data-track-cta="card-vcard">
-              💾 {t("save")}
+              <Icon name="download" className="h-4 w-4" /> {t("save")}
             </AnchorButton>
             <ShareCardButton label={t("share")} />
           </div>

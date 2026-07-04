@@ -6,6 +6,7 @@ import { db } from "@/lib/db";
 import { site, wa } from "@/lib/site";
 import { formatINR } from "@/lib/calculators";
 import { Container, Badge, AnchorButton, Card, WhatsAppIcon } from "@/components/ui";
+import { Icon } from "@/components/ui/icons";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
@@ -57,7 +58,9 @@ export default async function ListingPage({ params }: { params: Promise<{ locale
             <span className="text-sm capitalize text-ink-700/60">{listing.type}</span>
           </div>
           <h1 className="mt-3 font-display text-3xl font-bold text-ink-800 sm:text-4xl">{title}</h1>
-          <p className="mt-2 text-ink-700/70">📍 {listing.locality}, Navsari</p>
+          <p className="mt-2 flex items-center gap-1.5 text-ink-700/70">
+            <Icon name="mapPin" className="h-4 w-4" /> {listing.locality}, Navsari
+          </p>
 
           {listing.imageUrl && (
             <Image src={listing.imageUrl} alt={title} width={1200} height={675} className="mt-6 w-full rounded-2xl border border-ink-800/10 object-cover" />
@@ -94,7 +97,7 @@ export default async function ListingPage({ params }: { params: Promise<{ locale
                 <WhatsAppIcon /> {t("common.whatsapp")}
               </AnchorButton>
               <AnchorButton href={`tel:+${site.phone}`} variant="ink" data-track-cta={`call-listing-${listing.slug}`}>
-                📞 {t("common.call")}
+                <Icon name="phone" className="h-4 w-4" /> {t("common.call")}
               </AnchorButton>
             </div>
           </Card>

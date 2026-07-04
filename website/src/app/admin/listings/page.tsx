@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { isAdmin } from "@/lib/adminAuth";
+import { Icon } from "@/components/ui/icons";
 import { upsertListing, deleteListing } from "../actions";
 import { formatINR } from "@/lib/calculators";
 
@@ -16,7 +17,7 @@ export default async function AdminListings() {
       <h1 className="font-display text-2xl font-bold text-ink-800">Listings ({listings.length})</h1>
 
       <details className="rounded-2xl border border-gold-500/40 bg-gold-100/40 p-5" open={listings.length === 0}>
-        <summary className="cursor-pointer font-semibold text-ink-800">➕ Add new listing</summary>
+        <summary className="cursor-pointer font-semibold text-ink-800">＋ Add new listing</summary>
         <ListingForm />
       </details>
 
@@ -29,13 +30,19 @@ export default async function AdminListings() {
               <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${l.status === "available" ? "bg-emerald-100 text-emerald-700" : l.status === "token" ? "bg-gold-100 text-gold-600" : "bg-red-100 text-red-600"}`}>
                 {l.status}
               </span>
-              {l.featured && <span className="text-xs">⭐ featured</span>}
+              {l.featured && (
+                <span className="inline-flex items-center gap-1 text-xs text-gold-600">
+                  <Icon name="star" className="h-3 w-3 fill-current" /> featured
+                </span>
+              )}
               {l.isSample && <span className="text-xs opacity-60">(sample)</span>}
             </summary>
             <ListingForm listing={l} />
             <form action={deleteListing} className="mt-2">
               <input type="hidden" name="id" value={l.id} />
-              <button className="text-sm text-red-600 hover:underline">🗑 Delete listing</button>
+              <button className="inline-flex items-center gap-1.5 text-sm text-red-600 hover:underline">
+                <Icon name="trash" className="h-4 w-4" /> Delete listing
+              </button>
             </form>
           </details>
         ))}
@@ -89,8 +96,8 @@ function ListingForm({ listing }: { listing?: import("@prisma/client").Listing }
       <label className="text-sm md:col-span-2">Description (ગુજરાતી)
         <textarea name="descriptionGu" rows={2} defaultValue={listing?.descriptionGu ?? ""} className={inputCls} />
       </label>
-      <button className="rounded-full bg-ink-800 px-6 py-2.5 text-sm font-semibold text-paper hover:bg-ink-700 md:col-span-2 md:justify-self-start">
-        💾 Save listing
+      <button className="inline-flex items-center gap-2 rounded-full bg-ink-800 px-6 py-2.5 text-sm font-semibold text-paper hover:bg-ink-700 md:col-span-2 md:justify-self-start">
+        <Icon name="save" className="h-4 w-4" /> Save listing
       </button>
     </form>
   );

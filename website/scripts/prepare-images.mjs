@@ -13,9 +13,12 @@ const SRC = path.resolve(process.cwd(), "../Images");
 const OUT = path.resolve(process.cwd(), "public/images");
 
 const jobs = [
-  { src: "Single photo.jpeg", out: "hero.webp", cropBottomPct: 0.14 }, // remove watermark strip
+  // New hero: blazer shot — crop to him (removes bystanders + UI artifact at bottom)
+  { src: "Single photo.jpeg", out: "hero.webp", region: { x: 0.06, y: 0.1, w: 0.88, h: 0.86 } },
   { src: "Single photo 02.jpeg", out: "speaking.webp" },
   { src: "WhatsApp Image 2026-07-03 at 9.41.32 PM.jpeg", out: "portrait.webp" },
+  // Square crop of the formal headshot — Google search profile image (Person schema)
+  { src: "WhatsApp Image 2026-07-03 at 9.41.32 PM.jpeg", out: "portrait-square.webp", square: true },
   { src: "civic photo 01.jpeg", out: "civic-certificate.webp", blurFace: { x: 0.58, y: 0.1, w: 0.26, h: 0.22 } },
   { src: "WhatsApp Image 2026-07-03 at 9.41.42 PM.jpeg", out: "counselling.webp" },
   { src: "WhatsApp Image 2026-07-03 at 9.41.37 PM.jpeg", out: "flag.webp" },
@@ -40,6 +43,30 @@ for (const job of jobs) {
     const newH = Math.round(height * (1 - job.cropBottomPct));
     img = img.extract({ left: 0, top: 0, width, height: newH });
     height = newH;
+  }
+
+  if (job.region) {
+    const r = job.region;
+    const region = {
+      left: Math.round(width * r.x),
+      top: Math.round(height * r.y),
+      width: Math.round(width * r.w),
+      height: Math.round(height * r.h),
+    };
+    img = img.extract(region);
+    width = region.width;
+    height = region.height;
+  }
+
+  if (job.square) {
+    const side = Math.min(width, height);
+    img = img.extract({
+      left: Math.round((width - side) / 2),
+      top: 0, // headshot: keep the top (face)
+      width: side,
+      height: side,
+    });
+    width = height = side;
   }
 
   if (job.blurFace) {

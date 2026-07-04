@@ -9,7 +9,10 @@ async function guard() {
 }
 
 export async function loginAction(formData: FormData) {
-  await loginWithPassword(String(formData.get("password") ?? ""));
+  await loginWithPassword(
+    String(formData.get("username") ?? ""),
+    String(formData.get("password") ?? ""),
+  );
   revalidatePath("/admin");
 }
 

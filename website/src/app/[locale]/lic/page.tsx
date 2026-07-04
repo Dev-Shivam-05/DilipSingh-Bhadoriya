@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container, SectionHeading } from "@/components/ui";
+import { Icon } from "@/components/ui/icons";
 import { LicTools } from "@/components/lic/LicTools";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -22,7 +23,9 @@ export default async function LicPage({ params }: { params: Promise<{ locale: st
     <>
       <section className="bg-gradient-to-br from-ink-900 to-ink-700 py-14 text-paper">
         <Container>
-          <h1 className="font-display text-4xl font-bold sm:text-5xl">🛡️ {t("lic.title")}</h1>
+          <h1 className="flex items-center gap-4 font-display text-4xl font-bold sm:text-5xl">
+            <Icon name="shield" className="h-11 w-11 shrink-0 text-gold-300" /> {t("lic.title")}
+          </h1>
           <p className="mt-3 max-w-2xl text-lg text-ink-100">{t("lic.sub")}</p>
         </Container>
       </section>

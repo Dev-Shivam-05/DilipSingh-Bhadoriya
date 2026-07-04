@@ -7,9 +7,8 @@ export const site = {
     gu: "મિલકત, વીમો અને સરકારી કામકાજ — નવસારીનો એક વિશ્વાસુ ચહેરો, ૨૦૦૭થી.",
     hi: "संपत्ति, बीमा और सरकारी कामकाज — नवसारी का एक भरोसेमंद चेहरा, 2007 से।",
   },
-  // ⚠️ REPLACE with the real number before going live (digits only, country code first)
-  phone: "919999999999",
-  phoneDisplay: "+91 99999 99999",
+  phone: "919033964776",
+  phoneDisplay: "+91 90339 64776",
   email: "contact@dilipsinghbhadoriya.com",
   address: {
     street: "Jai Shaktinagar Society, Near Shivaji Chowk, Ramnagar",

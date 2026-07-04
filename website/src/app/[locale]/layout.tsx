@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, Noto_Sans_Gujarati } from "next/font/google";
+import { Baloo_2, Baloo_Bhai_2, Hind_Vadodara } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
@@ -12,12 +12,24 @@ import { GlobalJsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/lib/site";
 import "../globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", display: "swap" });
-const gujarati = Noto_Sans_Gujarati({
-  subsets: ["gujarati"],
+// Display: Baloo — rounded, confident, unmistakably Indian (ITF). Bhai 2 = Gujarati.
+const baloo = Baloo_2({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-baloo",
+  display: "swap",
+});
+const balooBhai = Baloo_Bhai_2({
+  subsets: ["gujarati", "latin"],
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-baloo-bhai",
+  display: "swap",
+});
+// Body: Hind Vadodara — humanist sans designed for Gujarat, same foundry.
+const hindVadodara = Hind_Vadodara({
+  subsets: ["gujarati", "latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-gujarati",
+  variable: "--font-hind",
   display: "swap",
 });
 
@@ -59,7 +71,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} className={`${inter.variable} ${playfair.variable} ${gujarati.variable}`}>
+    <html lang={locale} className={`${baloo.variable} ${balooBhai.variable} ${hindVadodara.variable}`}>
       <body className="flex min-h-screen flex-col">
         <GlobalJsonLd />
         <NextIntlClientProvider>

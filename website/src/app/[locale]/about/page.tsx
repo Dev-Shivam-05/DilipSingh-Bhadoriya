@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container, SectionHeading, Card } from "@/components/ui";
+import { Icon } from "@/components/ui/icons";
 import { Seal } from "@/components/brand/Seal";
 import { site } from "@/lib/site";
 
@@ -40,8 +41,8 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <ol className="relative mx-auto max-w-3xl border-l-2 border-gold-500/40 pl-8">
             {timeline.map((item, i) => (
               <li key={item.year} className="relative mb-12 last:mb-0">
-                <span className="absolute -left-[41px] flex h-6 w-6 items-center justify-center rounded-full border-2 border-gold-500 bg-paper text-[10px] font-bold text-gold-600" aria-hidden>
-                  ✦
+                <span className="absolute -left-[41px] flex h-6 w-6 items-center justify-center rounded-full border-2 border-gold-500 bg-paper text-gold-600" aria-hidden>
+                  <Icon name="diamond" className="h-3 w-3 fill-current" strokeWidth={1} />
                 </span>
                 <p className="font-display text-3xl font-bold text-gold-600">{item.year}</p>
                 <div className="mt-3 grid gap-6 sm:grid-cols-[1fr_180px]">

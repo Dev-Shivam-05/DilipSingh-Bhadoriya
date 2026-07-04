@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { isAdmin } from "@/lib/adminAuth";
+import { Icon } from "@/components/ui/icons";
 import { updateCivicStatus } from "../actions";
 
 export const dynamic = "force-dynamic";
@@ -17,7 +18,9 @@ export default async function AdminCivic() {
             <div className="flex flex-wrap items-center gap-3">
               <span className="font-mono font-bold text-gold-600">{c.token}</span>
               <span className="font-semibold capitalize text-ink-800">{c.category}</span>
-              <span className="text-sm text-ink-700/60">📍 {c.area}</span>
+              <span className="inline-flex items-center gap-1 text-sm text-ink-700/60">
+                <Icon name="mapPin" className="h-3.5 w-3.5" /> {c.area}
+              </span>
               <span className="text-sm text-ink-700/60">{c.name} · {c.phone}</span>
               <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${c.status === "resolved" ? "bg-emerald-100 text-emerald-700" : c.status === "in_progress" ? "bg-gold-100 text-gold-600" : "bg-ink-100 text-ink-800"}`}>{c.status}</span>
             </div>

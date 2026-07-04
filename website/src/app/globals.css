@@ -23,8 +23,8 @@
   --color-paper: #faf7f0;
   --color-paper-dark: #f1ebdd;
 
-  --font-sans: var(--font-inter), var(--font-gujarati), system-ui, sans-serif;
-  --font-display: var(--font-playfair), var(--font-gujarati), Georgia, serif;
+  --font-sans: var(--font-hind), system-ui, sans-serif;
+  --font-display: var(--font-baloo), var(--font-baloo-bhai), var(--font-hind), sans-serif;
 
   --shadow-seal: 0 10px 40px -12px rgb(14 42 71 / 0.35);
   --animate-flicker: flicker 2.4s ease-in-out infinite;
@@ -89,10 +89,41 @@ body {
   animation: var(--animate-flicker);
 }
 
+/* ── Motion system ───────────────────────────────────────── */
+
+/* Staggered entrance for hero content (pure CSS, runs once on load) */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise { animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) both; }
+.rise-1 { animation-delay: 0.08s; }
+.rise-2 { animation-delay: 0.18s; }
+.rise-3 { animation-delay: 0.28s; }
+.rise-4 { animation-delay: 0.4s; }
+.rise-5 { animation-delay: 0.52s; }
+
+/* Scroll-reveal (Reveal component toggles .is-visible) */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* Gentle float for decorative elements */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.floaty { animation: floaty 6s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   .seal-draw, .seal-draw-slow { animation: none; stroke-dashoffset: 0; }
   .seal-fade { animation: none; opacity: 1; }
   .seal-flame { animation: none !important; }
+  .rise, .floaty { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
   * { scroll-behavior: auto !important; }
 }
 

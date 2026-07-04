@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { isAdmin } from "@/lib/adminAuth";
+import { Icon } from "@/components/ui/icons";
 import { setTestimonialApproval, addTestimonial } from "../actions";
 
 export const dynamic = "force-dynamic";
@@ -15,7 +16,7 @@ export default async function AdminTestimonials() {
       <h1 className="font-display text-2xl font-bold text-ink-800">Testimonials</h1>
 
       <details className="rounded-2xl border border-gold-500/40 bg-gold-100/40 p-5">
-        <summary className="cursor-pointer font-semibold text-ink-800">➕ Add testimonial</summary>
+        <summary className="cursor-pointer font-semibold text-ink-800">＋ Add testimonial</summary>
         <form action={addTestimonial} className="mt-4 grid gap-3 md:grid-cols-2">
           <label className="text-sm">Name<input name="name" required className={inputCls} /></label>
           <label className="text-sm">Locality<input name="locality" className={inputCls} /></label>
@@ -25,7 +26,9 @@ export default async function AdminTestimonials() {
             </select>
           </label>
           <label className="text-sm md:col-span-2">Message<textarea name="message" required rows={2} className={inputCls} /></label>
-          <button className="rounded-full bg-ink-800 px-6 py-2.5 text-sm font-semibold text-paper md:justify-self-start">💾 Save</button>
+          <button className="inline-flex items-center gap-2 rounded-full bg-ink-800 px-6 py-2.5 text-sm font-semibold text-paper md:justify-self-start">
+            <Icon name="save" className="h-4 w-4" /> Save
+          </button>
         </form>
       </details>
 
@@ -40,13 +43,17 @@ export default async function AdminTestimonials() {
                 <form action={setTestimonialApproval}>
                   <input type="hidden" name="id" value={t.id} />
                   <input type="hidden" name="approve" value="1" />
-                  <button className="rounded-full bg-emerald-600 px-4 py-1.5 text-xs font-semibold text-white">✓ Approve</button>
+                  <button className="inline-flex items-center gap-1 rounded-full bg-emerald-600 px-4 py-1.5 text-xs font-semibold text-white">
+                    <Icon name="check" className="h-3.5 w-3.5" /> Approve
+                  </button>
                 </form>
               )}
               <form action={setTestimonialApproval}>
                 <input type="hidden" name="id" value={t.id} />
                 <input type="hidden" name="approve" value="0" />
-                <button className="rounded-full border border-red-300 px-4 py-1.5 text-xs font-semibold text-red-600">🗑 Delete</button>
+                <button className="inline-flex items-center gap-1 rounded-full border border-red-300 px-4 py-1.5 text-xs font-semibold text-red-600">
+                  <Icon name="trash" className="h-3.5 w-3.5" /> Delete
+                </button>
               </form>
             </div>
           </div>

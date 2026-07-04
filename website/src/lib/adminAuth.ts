@@ -5,8 +5,9 @@ const COOKIE = "dsb_admin";
 
 function expectedToken(): string {
   const secret = process.env.SESSION_SECRET ?? "";
+  const username = process.env.ADMIN_USERNAME ?? "admin";
   const password = process.env.ADMIN_PASSWORD ?? "";
-  return createHmac("sha256", secret).update(`admin:${password}`).digest("hex");
+  return createHmac("sha256", secret).update(`${username}:${password}`).digest("hex");
 }
 
 export async function isAdmin(): Promise<boolean> {
@@ -19,8 +20,11 @@ export async function isAdmin(): Promise<boolean> {
   return a.length === b.length && timingSafeEqual(a, b);
 }
 
-export async function loginWithPassword(password: string): Promise<boolean> {
-  if (!process.env.ADMIN_PASSWORD || password !== process.env.ADMIN_PASSWORD) return false;
+export async function loginWithPassword(username: string, password: string): Promise<boolean> {
+  const expectedUser = process.env.ADMIN_USERNAME ?? "admin";
+  if (!process.env.ADMIN_PASSWORD || username !== expectedUser || password !== process.env.ADMIN_PASSWORD) {
+    return false;
+  }
   const jar = await cookies();
   jar.set(COOKIE, expectedToken(), {
     httpOnly: true,

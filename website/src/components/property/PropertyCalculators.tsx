@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { emiBreakdown, gujaratStampDuty, formatINR } from "@/lib/calculators";
+import { Icon } from "@/components/ui/icons";
 
 const inputCls =
   "w-full rounded-xl border border-ink-800/20 bg-white px-4 py-2.5 outline-none focus:border-gold-500";
@@ -25,7 +26,9 @@ function EmiCalc() {
 
   return (
     <div className="rounded-2xl border border-ink-800/10 bg-paper p-6 shadow-sm" data-track-section="calc-emi">
-      <h3 className="font-display text-xl font-bold text-ink-800">💰 {t("property.emi")}</h3>
+      <h3 className="flex items-center gap-2.5 font-display text-xl font-bold text-ink-800">
+        <Icon name="banknote" className="h-6 w-6 text-gold-600" /> {t("property.emi")}
+      </h3>
       <div className="mt-4 space-y-3">
         <Field label={t("property.loanAmount")} value={amount} onChange={setAmount} min={100000} max={20000000} step={50000} />
         <Field label={t("property.interestRate")} value={rate} onChange={setRate} min={6} max={15} step={0.1} />
@@ -48,7 +51,9 @@ function StampCalc() {
 
   return (
     <div className="rounded-2xl border border-ink-800/10 bg-paper p-6 shadow-sm" data-track-section="calc-stamp">
-      <h3 className="font-display text-xl font-bold text-ink-800">🧾 {t("property.stamp")}</h3>
+      <h3 className="flex items-center gap-2.5 font-display text-xl font-bold text-ink-800">
+        <Icon name="receipt" className="h-6 w-6 text-gold-600" /> {t("property.stamp")}
+      </h3>
       <div className="mt-4 space-y-3">
         <Field label={t("property.propertyValue")} value={value} onChange={setValue} min={100000} max={50000000} step={100000} />
         <label className="flex items-center gap-3 rounded-xl border border-gold-500/30 bg-gold-100/50 px-4 py-3 text-sm font-medium text-ink-800">
@@ -58,7 +63,7 @@ function StampCalc() {
       </div>
       <div className="mt-5 grid grid-cols-3 gap-3 border-t border-gold-500/30 pt-4 text-center">
         <Result label={t("property.stampDuty")} value={formatINR(r.stamp)} />
-        <Result label={t("property.registrationFee")} value={female ? "₹0 ✓" : formatINR(r.registration)} />
+        <Result label={t("property.registrationFee")} value={female ? "₹0" : formatINR(r.registration)} />
         <Result label={t("property.totalCost")} value={formatINR(r.total)} highlight />
       </div>
       <p className="mt-3 text-xs text-ink-700/60">{t("common.estimate")}</p>

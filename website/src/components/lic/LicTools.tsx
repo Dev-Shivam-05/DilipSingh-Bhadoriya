@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { premiumEstimate, endowmentMaturityEstimate, humanLifeValue, formatINR } from "@/lib/calculators";
 import { wa } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/ui";
+import { Icon } from "@/components/ui/icons";
 
 const inputCls = "w-full rounded-xl border border-ink-800/20 bg-white px-4 py-2.5 outline-none focus:border-gold-500";
 const boxCls = "rounded-2xl border border-ink-800/10 bg-paper p-6 shadow-sm";
@@ -42,7 +43,9 @@ function PlanQuiz() {
 
   return (
     <div className={boxCls} data-track-section="lic-quiz">
-      <h2 className="font-display text-2xl font-bold text-ink-800">🎯 {t("quizTitle")}</h2>
+      <h2 className="flex items-center gap-3 font-display text-2xl font-bold text-ink-800">
+        <Icon name="target" className="h-7 w-7 text-saffron-500" /> {t("quizTitle")}
+      </h2>
       <p className="mt-1 text-sm text-ink-700/70">{t("quizSub")}</p>
 
       <div className="mt-5 grid gap-5 md:grid-cols-3">
@@ -101,7 +104,9 @@ function PremiumCalc() {
 
   return (
     <div className={boxCls} data-track-section="calc-premium">
-      <h3 className="font-display text-lg font-bold text-ink-800">📊 {t("calcPremium")}</h3>
+      <h3 className="flex items-center gap-2.5 font-display text-lg font-bold text-ink-800">
+        <Icon name="chartBar" className="h-5 w-5 text-gold-600" /> {t("calcPremium")}
+      </h3>
       <div className="mt-4 space-y-3 text-sm">
         <NumField label={t("sumAssured")} value={sum} set={setSum} />
         <NumField label={t("age")} value={age} set={setAge} />
@@ -120,7 +125,9 @@ function MaturityCalc() {
 
   return (
     <div className={boxCls} data-track-section="calc-maturity">
-      <h3 className="font-display text-lg font-bold text-ink-800">🌱 {t("calcMaturity")}</h3>
+      <h3 className="flex items-center gap-2.5 font-display text-lg font-bold text-ink-800">
+        <Icon name="sprout" className="h-5 w-5 text-gold-600" /> {t("calcMaturity")}
+      </h3>
       <div className="mt-4 space-y-3 text-sm">
         <NumField label={t("sumAssured")} value={sum} set={setSum} />
         <NumField label={t("term")} value={term} set={setTerm} />
@@ -139,7 +146,9 @@ function HlvCalc() {
 
   return (
     <div className={boxCls} data-track-section="calc-hlv">
-      <h3 className="font-display text-lg font-bold text-ink-800">🧮 {t("calcHlv")}</h3>
+      <h3 className="flex items-center gap-2.5 font-display text-lg font-bold text-ink-800">
+        <Icon name="calculator" className="h-5 w-5 text-gold-600" /> {t("calcHlv")}
+      </h3>
       <div className="mt-4 space-y-3 text-sm">
         <NumField label={t("annualIncome")} value={income} set={setIncome} />
         <NumField label={t("age")} value={age} set={setAge} />

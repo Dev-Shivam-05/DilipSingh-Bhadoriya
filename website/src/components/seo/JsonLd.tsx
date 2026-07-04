@@ -8,7 +8,8 @@ export function GlobalJsonLd() {
     "@id": `${site.url}/#person`,
     name: site.name,
     jobTitle: "Real Estate Agent, LIC Agent & Municipal Corporator",
-    image: `${site.url}/images/portrait.webp`,
+    // Square first — Google uses this for the circular profile in search results
+    image: [`${site.url}/images/portrait-square.webp`, `${site.url}/images/portrait.webp`],
     url: site.url,
     telephone: `+${site.phone}`,
     address: {
@@ -28,7 +29,7 @@ export function GlobalJsonLd() {
     "@id": `${site.url}/#business`,
     name: site.name,
     description: site.tagline.en,
-    image: `${site.url}/images/portrait.webp`,
+    image: [`${site.url}/images/portrait-square.webp`, `${site.url}/images/portrait.webp`],
     url: site.url,
     telephone: `+${site.phone}`,
     foundingDate: String(site.established),

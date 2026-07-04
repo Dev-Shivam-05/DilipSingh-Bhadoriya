@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { guides, getGuide } from "@/content/guides";
 import { site, wa } from "@/lib/site";
 import { Container, Card, AnchorButton, WhatsAppIcon } from "@/components/ui";
+import { Icon } from "@/components/ui/icons";
 import { Seal } from "@/components/brand/Seal";
 import type { Locale } from "@/i18n/routing";
 
@@ -57,14 +58,18 @@ export default async function GuidePage({ params }: { params: Promise<{ locale: 
 
       <Container className="grid gap-10 lg:grid-cols-[1.6fr_1fr]">
         <div>
-          <p className="text-5xl" aria-hidden>{guide.emoji}</p>
+          <span className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-saffron-100 text-saffron-600">
+            <Icon name={guide.icon} className="h-9 w-9" />
+          </span>
           <h1 className="mt-4 font-display text-3xl font-bold leading-tight text-ink-800 sm:text-4xl">
             {guide.title[loc]}
           </h1>
           <div className="ledger-rule my-6 w-40" />
           <p className="text-lg leading-relaxed text-ink-800">{guide.intro[loc]}</p>
 
-          <h2 className="mt-10 font-display text-2xl font-bold text-ink-800">🪜 {t("steps")}</h2>
+          <h2 className="mt-10 flex items-center gap-3 font-display text-2xl font-bold text-ink-800">
+            <Icon name="listChecks" className="h-6 w-6 text-gold-600" /> {t("steps")}
+          </h2>
           <ol className="mt-5 space-y-4">
             {guide.steps[loc].map((step, i) => (
               <li key={i} className="flex gap-4">
@@ -78,7 +83,9 @@ export default async function GuidePage({ params }: { params: Promise<{ locale: 
 
           {guide.faqs.length > 0 && (
             <>
-              <h2 className="mt-10 font-display text-2xl font-bold text-ink-800">❓ {t("faqs")}</h2>
+              <h2 className="mt-10 flex items-center gap-3 font-display text-2xl font-bold text-ink-800">
+                <Icon name="helpCircle" className="h-6 w-6 text-gold-600" /> {t("faqs")}
+              </h2>
               <div className="mt-4 space-y-4">
                 {guide.faqs.map((f, i) => (
                   <details key={i} className="rounded-2xl border border-ink-800/10 bg-white p-5 shadow-sm">
@@ -93,7 +100,9 @@ export default async function GuidePage({ params }: { params: Promise<{ locale: 
 
         <aside className="space-y-5">
           <Card data-track-section="guide-checklist">
-            <h2 className="font-display text-lg font-bold text-ink-800">✅ {t("checklist")}</h2>
+            <h2 className="flex items-center gap-2.5 font-display text-lg font-bold text-ink-800">
+              <Icon name="clipboardCheck" className="h-5 w-5 text-gold-600" /> {t("checklist")}
+            </h2>
             <ul className="mt-3 space-y-2">
               {guide.documents[loc].map((d, i) => (
                 <li key={i} className="flex items-start gap-2 text-sm leading-relaxed text-ink-800">

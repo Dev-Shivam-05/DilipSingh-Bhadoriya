@@ -4,12 +4,14 @@
  * Facts (portals, offices) current as of 2026; fees are indicative.
  */
 
+import type { IconName } from "@/components/ui/icons";
+
 export type L10n = { gu: string; hi: string; en: string };
 
 export type Guide = {
   slug: string;
   category: "identity" | "certificate" | "property" | "welfare";
-  emoji: string;
+  icon: IconName;
   popular?: boolean;
   title: L10n;
   intro: L10n;
@@ -31,7 +33,7 @@ export const guides: Guide[] = [
   {
     slug: "income-certificate-gujarat",
     category: "certificate",
-    emoji: "📄",
+    icon: "receipt",
     popular: true,
     title: {
       gu: "આવકનો દાખલો (Income Certificate) કેવી રીતે કઢાવવો",
@@ -91,7 +93,7 @@ export const guides: Guide[] = [
   {
     slug: "caste-certificate-gujarat",
     category: "certificate",
-    emoji: "🪪",
+    icon: "idCard",
     popular: true,
     title: {
       gu: "જાતિનો દાખલો (Caste Certificate) — સંપૂર્ણ માર્ગદર્શન",
@@ -144,7 +146,7 @@ export const guides: Guide[] = [
   {
     slug: "domicile-certificate-gujarat",
     category: "certificate",
-    emoji: "🏠",
+    icon: "home",
     title: {
       gu: "ડોમિસાઇલ સર્ટિફિકેટ (રહેઠાણનો દાખલો) કેવી રીતે મેળવવો",
       hi: "डोमिसाइल सर्टिफिकेट (निवास प्रमाणपत्र) कैसे पाएँ",
@@ -188,7 +190,7 @@ export const guides: Guide[] = [
   {
     slug: "aadhaar-card-correction",
     category: "identity",
-    emoji: "🆔",
+    icon: "userCheck",
     popular: true,
     title: {
       gu: "આધાર કાર્ડમાં નામ, જન્મતારીખ કે સરનામું કેવી રીતે સુધારવું",
@@ -245,7 +247,7 @@ export const guides: Guide[] = [
   {
     slug: "pan-card-apply",
     category: "identity",
-    emoji: "💳",
+    icon: "creditCard",
     title: {
       gu: "નવું PAN કાર્ડ — ઓનલાઇન અરજી, ઘરે બેઠાં",
       hi: "नया PAN कार्ड — ऑनलाइन आवेदन, घर बैठे",
@@ -301,7 +303,7 @@ export const guides: Guide[] = [
   {
     slug: "ration-card-gujarat",
     category: "welfare",
-    emoji: "🌾",
+    icon: "sprout",
     popular: true,
     title: {
       gu: "નવું રેશન કાર્ડ / નામ ઉમેરવું-કમી કરવું — ગુજરાત",
@@ -353,7 +355,7 @@ export const guides: Guide[] = [
   {
     slug: "voter-id-navsari",
     category: "identity",
-    emoji: "🗳️",
+    icon: "vote",
     title: {
       gu: "મતદાર કાર્ડ (Voter ID) — નવું, સુધારો કે સરનામું બદલવું",
       hi: "वोटर कार्ड (Voter ID) — नया, सुधार या पता बदलना",
@@ -404,7 +406,7 @@ export const guides: Guide[] = [
   {
     slug: "birth-certificate-navsari",
     category: "certificate",
-    emoji: "👶",
+    icon: "baby",
     title: {
       gu: "જન્મનો દાખલો — નવસારી નગરપાલિકામાંથી કેવી રીતે મેળવવો",
       hi: "जन्म प्रमाणपत्र — नवसारी नगरपालिका से कैसे पाएँ",
@@ -455,7 +457,7 @@ export const guides: Guide[] = [
   {
     slug: "death-certificate-navsari",
     category: "certificate",
-    emoji: "🕊️",
+    icon: "heart",
     title: {
       gu: "મરણનો દાખલો — પ્રક્રિયા અને LIC ક્લેમ માટે મહત્ત્વ",
       hi: "मृत्यु प्रमाणपत्र — प्रक्रिया और LIC क्लेम के लिए महत्व",
@@ -503,7 +505,7 @@ export const guides: Guide[] = [
   {
     slug: "7-12-utara-anyror",
     category: "property",
-    emoji: "🌱",
+    icon: "map",
     popular: true,
     title: {
       gu: "૭/૧૨ ઉતારો અને પ્રોપર્ટી કાર્ડ — ઘરબેઠાં ઓનલાઇન",
@@ -563,7 +565,7 @@ export const guides: Guide[] = [
   {
     slug: "varsai-inheritance-gujarat",
     category: "property",
-    emoji: "🧾",
+    icon: "users",
     popular: true,
     title: {
       gu: "વારસાઈ (Varsai) — વારસદારના નામે મિલકત કેવી રીતે ચઢાવવી",
@@ -623,7 +625,7 @@ export const guides: Guide[] = [
   {
     slug: "widow-pension-gujarat",
     category: "welfare",
-    emoji: "🤝",
+    icon: "banknote",
     title: {
       gu: "ગંગા સ્વરૂપા યોજના — વિધવા સહાય ₹1,250/મહિનો",
       hi: "गंगा स्वरूपा योजना — विधवा सहायता ₹1,250/माह",
@@ -670,7 +672,7 @@ export const guides: Guide[] = [
   {
     slug: "ayushman-card-gujarat",
     category: "welfare",
-    emoji: "🏥",
+    icon: "medicalCross",
     title: {
       gu: "આયુષ્માન કાર્ડ (PMJAY-MA) — ₹10 લાખ સુધી મફત સારવાર",
       hi: "आयुष्मान कार्ड (PMJAY-MA) — ₹10 लाख तक मुफ़्त इलाज",

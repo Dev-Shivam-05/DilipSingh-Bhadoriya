@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { isAdmin } from "@/lib/adminAuth";
+import { Icon, type IconName } from "@/components/ui/icons";
 import { toggleInquiry } from "../actions";
 
 export const dynamic = "force-dynamic";
@@ -12,8 +13,8 @@ export default async function AdminInquiries() {
     take: 200,
   });
 
-  const KIND_EMOJI: Record<string, string> = {
-    property: "🏡", lic: "🛡️", documents: "📄", civic: "🏛️", general: "💬", requirement: "🎯",
+  const KIND_ICON: Record<string, IconName> = {
+    property: "home", lic: "shield", documents: "fileText", civic: "landmark", general: "messageCircle", requirement: "target",
   };
 
   return (
@@ -25,7 +26,7 @@ export default async function AdminInquiries() {
         {inquiries.map((q) => (
           <div key={q.id} className={`rounded-2xl border p-5 ${q.handled ? "border-ink-800/10 bg-white opacity-60" : "border-saffron-500/40 bg-saffron-100/30"}`}>
             <div className="flex flex-wrap items-center gap-3">
-              <span>{KIND_EMOJI[q.kind]}</span>
+              <Icon name={KIND_ICON[q.kind] ?? "messageCircle"} className="h-5 w-5 text-ink-600" />
               <span className="font-semibold text-ink-800">{q.name}</span>
               <a href={`https://wa.me/91${q.phone.replace(/\D/g, "").slice(-10)}`} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-emerald-700 hover:underline">
                 {q.phone} ↗ WhatsApp
@@ -37,8 +38,8 @@ export default async function AdminInquiries() {
             {q.meta && <p className="mt-1 font-mono text-xs text-ink-700/50">{q.meta}</p>}
             <form action={toggleInquiry} className="mt-3">
               <input type="hidden" name="id" value={q.id} />
-              <button className="rounded-full border border-ink-800/20 px-4 py-1.5 text-xs font-semibold text-ink-800 hover:bg-ink-50">
-                {q.handled ? "↩ Mark as new" : "✓ Mark handled"}
+              <button className="inline-flex items-center gap-1.5 rounded-full border border-ink-800/20 px-4 py-1.5 text-xs font-semibold text-ink-800 hover:bg-ink-50">
+                {q.handled ? "Mark as new" : <><Icon name="check" className="h-3.5 w-3.5" /> Mark handled</>}
               </button>
             </form>
           </div>

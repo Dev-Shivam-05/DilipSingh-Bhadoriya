@@ -2,6 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
+import { Icon } from "@/components/ui/icons";
 
 type Props = {
   kind: string;
@@ -48,7 +49,7 @@ export function InquiryForm({ kind, meta, listingId, children, messageLabel, cta
   if (state === "done") {
     return (
       <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center">
-        <p className="text-2xl">🙏</p>
+        <Icon name="checkCircle" className="mx-auto h-9 w-9 text-emerald-600" />
         <p className="mt-2 font-semibold text-emerald-800">{t("thanks")}</p>
       </div>
     );
