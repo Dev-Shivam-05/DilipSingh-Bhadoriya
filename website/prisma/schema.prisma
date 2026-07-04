@@ -1,12 +1,12 @@
 // Dilipsingh Bhadoriya — portfolio platform schema
-// Dev: SQLite. Prod: switch provider to "postgresql" + DATABASE_URL (Supabase/Neon). No other changes needed.
+// Postgres everywhere (Neon via Vercel). Local dev uses the same DATABASE_URL from .env.
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
