@@ -7,6 +7,9 @@ import { Container, SectionHeading, Card, Badge } from "@/components/ui";
 import { Icon, type IconName } from "@/components/ui/icons";
 import { CivicIssueForm } from "@/components/corporator/CivicIssueForm";
 
+// ISR: board stays fast; status updates from admin revalidate it
+export const revalidate = 60;
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "corporator" });
@@ -21,11 +24,15 @@ export default async function CorporatorPage({ params }: { params: Promise<{ loc
   setRequestLocale(locale);
   const t = await getTranslations("corporator");
 
-  const issues = await db.civicIssue.findMany({
-    where: { public: true },
-    orderBy: { createdAt: "desc" },
-    take: 30,
-  });
+  const [issues, statusCounts] = await Promise.all([
+    db.civicIssue.findMany({
+      where: { public: true },
+      orderBy: { createdAt: "desc" },
+      take: 30,
+    }),
+    db.civicIssue.groupBy({ by: ["status"], where: { public: true }, _count: { status: true } }),
+  ]);
+  const countOf = (s: string) => statusCounts.find((c) => c.status === s)?._count.status ?? 0;
 
   const STATUS_BADGE: Record<string, "ink" | "gold" | "green"> = {
     received: "ink",
@@ -72,6 +79,24 @@ export default async function CorporatorPage({ params }: { params: Promise<{ loc
       <section data-track-section="civic-board" className="bg-paper-dark py-14">
         <Container>
           <SectionHeading title={t("boardTitle")} sub={t("boardSub")} />
+          {/* Live resolution scoreboard — accountability in numbers */}
+          <div className="mb-8 grid grid-cols-3 gap-4 md:max-w-xl">
+            {(["received", "in_progress", "resolved"] as const).map((s) => (
+              <div
+                key={s}
+                className={`rounded-2xl border p-4 text-center ${
+                  s === "resolved" ? "border-emerald-200 bg-emerald-50" : "border-ink-800/10 bg-white"
+                }`}
+              >
+                <p className={`font-display text-3xl font-bold ${s === "resolved" ? "text-emerald-600" : "text-ink-800"}`}>
+                  {countOf(s)}
+                </p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-ink-700/60">
+                  {t(`status.${s}`)}
+                </p>
+              </div>
+            ))}
+          </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {issues.map((issue) => (
               <Card key={issue.id} className="!p-5">

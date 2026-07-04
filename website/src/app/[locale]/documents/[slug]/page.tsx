@@ -3,10 +3,17 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { guides, getGuide } from "@/content/guides";
 import { site, wa } from "@/lib/site";
+import { Link } from "@/i18n/navigation";
+import { db } from "@/lib/db";
 import { Container, Card, AnchorButton, WhatsAppIcon } from "@/components/ui";
 import { Icon } from "@/components/ui/icons";
 import { Seal } from "@/components/brand/Seal";
+import { ReadingProgress } from "@/components/documents/ReadingProgress";
+import { ShareGuide } from "@/components/documents/ShareGuide";
 import type { Locale } from "@/i18n/routing";
+
+// ISR: static speed, refreshed hourly (keeps the live read-count current)
+export const revalidate = 3600;
 
 export function generateStaticParams() {
   return guides.map((g) => ({ slug: g.slug }));
@@ -29,7 +36,25 @@ export default async function GuidePage({ params }: { params: Promise<{ locale: 
   const guide = getGuide(slug);
   if (!guide) notFound();
   const t = await getTranslations("documents");
+  const tn = await getTranslations("nav");
+  const th = await getTranslations("home");
   const loc = locale as Locale;
+
+  const related = guides.filter((g) => g.category === guide.category && g.slug !== guide.slug).slice(0, 3);
+  const readCount = await db.analyticsEvent
+    .count({ where: { type: "pageview", path: { endsWith: `/documents/${slug}` } } })
+    .catch(() => 0);
+  const guideUrl = `${site.url}${loc === "gu" ? "" : `/${loc}`}/documents/${guide.slug}`;
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: site.name, item: site.url },
+      { "@type": "ListItem", position: 2, name: tn("documents"), item: `${site.url}/documents` },
+      { "@type": "ListItem", position: 3, name: guide.title[loc] },
+    ],
+  };
 
   const howToJsonLd = {
     "@context": "https://schema.org",
@@ -53,17 +78,32 @@ export default async function GuidePage({ params }: { params: Promise<{ locale: 
 
   return (
     <article className="py-12">
+      <ReadingProgress />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }} />
       {faqJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />}
 
       <Container className="grid gap-10 lg:grid-cols-[1.6fr_1fr]">
         <div>
+          <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-2 text-sm text-ink-700/60">
+            <Link href="/" className="hover:text-gold-600">{tn("home")}</Link>
+            <span aria-hidden>›</span>
+            <Link href="/documents" className="hover:text-gold-600">{tn("documents")}</Link>
+            <span aria-hidden>›</span>
+            <span className="text-ink-800">{guide.title[loc].split("—")[0].split("(")[0].trim().slice(0, 40)}</span>
+          </nav>
           <span className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-saffron-100 text-saffron-600">
             <Icon name={guide.icon} className="h-9 w-9" />
           </span>
           <h1 className="mt-4 font-display text-3xl font-bold leading-tight text-ink-800 sm:text-4xl">
             {guide.title[loc]}
           </h1>
+          {readCount >= 25 && (
+            <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-ink-50 px-3 py-1 text-xs font-semibold text-ink-700">
+              <Icon name="users" className="h-3.5 w-3.5 text-gold-600" />
+              {readCount.toLocaleString("en-IN")}+
+            </p>
+          )}
           <div className="ledger-rule my-6 w-40" />
           <p className="text-lg leading-relaxed text-ink-800">{guide.intro[loc]}</p>
 
@@ -95,6 +135,27 @@ export default async function GuidePage({ params }: { params: Promise<{ locale: 
                 ))}
               </div>
             </>
+          )}
+
+          <ShareGuide title={guide.title[loc]} url={guideUrl} shareLabel="WhatsApp" />
+
+          {related.length > 0 && (
+            <div className="mt-12 border-t border-gold-500/30 pt-8">
+              <h2 className="font-display text-xl font-bold text-ink-800">{th("guides")}</h2>
+              <div className="mt-4 grid gap-4 sm:grid-cols-3">
+                {related.map((r) => (
+                  <Link
+                    key={r.slug}
+                    href={`/documents/${r.slug}`}
+                    data-track-cta={`related-${r.slug}`}
+                    className="rounded-2xl border border-ink-800/10 bg-white p-4 text-sm shadow-sm transition-all hover:-translate-y-0.5 hover:border-gold-400"
+                  >
+                    <Icon name={r.icon} className="h-6 w-6 text-saffron-500" />
+                    <p className="mt-2 font-semibold leading-snug text-ink-800">{r.title[loc]}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
           )}
         </div>
 

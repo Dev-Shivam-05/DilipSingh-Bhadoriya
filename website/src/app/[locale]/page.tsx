@@ -12,6 +12,9 @@ import { Counter } from "@/components/home/Counter";
 import { ListingCard } from "@/components/property/ListingCard";
 import type { Locale } from "@/i18n/routing";
 
+// ISR: served static-fast; admin edits bust it via revalidatePath
+export const revalidate = 120;
+
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -162,7 +165,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section data-track-section="trust" className="bg-ink-900 py-16 text-paper">
         <Container className="grid items-center gap-10 lg:grid-cols-2">
           <div className="arch-frame mx-auto max-w-sm border-4 border-gold-500/50">
-            <Image src="/images/counselling.webp" alt="Dilipsingh Bhadoriya helping residents with documents" width={800} height={360} className="h-full w-full object-cover" style={{ aspectRatio: "4/5", objectPosition: "20% center" }} />
+            <Image src="/images/speaking.webp" alt="Dilipsingh Bhadoriya addressing the public" width={720} height={957} className="h-full w-full object-cover object-top" style={{ aspectRatio: "4/5" }} />
           </div>
           <div>
             <SectionHeading title={t("home.trustTitle")} tone="dark" />

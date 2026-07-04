@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
+import QRCode from "qrcode";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Seal } from "@/components/brand/Seal";
 import { AnchorButton, WhatsAppIcon } from "@/components/ui";
@@ -15,6 +16,13 @@ export default async function CardPage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("card");
+
+  // QR → the card itself; scans from his printed cards/office board land here
+  const qr = await QRCode.toDataURL(`${site.url}/card`, {
+    margin: 1,
+    width: 480,
+    color: { dark: "#0e2a47", light: "#faf7f0" },
+  });
 
   return (
     <section className="flex min-h-[85vh] items-center justify-center bg-ink-950 px-4 py-16">
@@ -49,6 +57,16 @@ export default async function CardPage({ params }: { params: Promise<{ locale: s
               <Icon name="download" className="h-4 w-4" /> {t("save")}
             </AnchorButton>
             <ShareCardButton label={t("share")} />
+          </div>
+
+          <div className="mt-6 flex items-center justify-center gap-4 rounded-2xl border border-gold-500/20 bg-paper/5 p-4">
+            {/* eslint-disable-next-line @next/next/no-img-element -- data URI QR */}
+            <img src={qr} alt="QR code — scan to open this card" className="h-24 w-24 rounded-lg border border-gold-500/40" />
+            <p className="max-w-40 text-left text-xs leading-relaxed text-ink-100/70">
+              Scan → save contact.
+              <br />
+              Print-ready for visiting cards.
+            </p>
           </div>
         </div>
         <p className="border-t border-gold-500/20 bg-ink-900/60 py-3 text-[10px] uppercase tracking-[0.25em] text-gold-500/70">

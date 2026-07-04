@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 import { guides, guideCategories } from "@/content/guides";
+import { GuideLibrary } from "@/components/documents/GuideLibrary";
 import { Container, SectionHeading, Card } from "@/components/ui";
 import { Icon } from "@/components/ui/icons";
 import { SevaTracker } from "@/components/documents/SevaTracker";
@@ -36,38 +36,17 @@ export default async function DocumentsPage({ params }: { params: Promise<{ loca
       <section data-track-section="guide-library" className="py-14">
         <Container>
           <SectionHeading title={t("documents.wizardTitle")} />
-          {guideCategories.map((cat) => {
-            const items = guides.filter((g) => g.category === cat.key);
-            if (!items.length) return null;
-            return (
-              <div key={cat.key} className="mb-10">
-                <h3 className="mb-4 flex items-center gap-3 text-lg font-bold text-ink-800">
-                  {cat.label[loc]}
-                  <span className="ledger-rule w-24" />
-                </h3>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {items.map((g) => (
-                    <Link
-                      key={g.slug}
-                      href={`/documents/${g.slug}`}
-                      data-track-cta={`guide-${g.slug}`}
-                      className="group flex items-start gap-4 rounded-2xl border border-ink-800/10 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-gold-400 hover:shadow-seal"
-                    >
-                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-saffron-100 text-saffron-600">
-                        <Icon name={g.icon} className="h-6 w-6" />
-                      </span>
-                      <div>
-                        <h4 className="font-semibold leading-snug text-ink-800 group-hover:text-gold-600">
-                          {g.title[loc]}
-                        </h4>
-                        <p className="mt-1 line-clamp-2 text-sm text-ink-700/70">{g.intro[loc]}</p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+          <GuideLibrary
+            searchPlaceholder={t("documents.search")}
+            categories={guideCategories.map((c) => ({ key: c.key, label: c.label[loc] }))}
+            items={guides.map((g) => ({
+              slug: g.slug,
+              icon: g.icon,
+              category: g.category,
+              title: g.title[loc],
+              intro: g.intro[loc],
+            }))}
+          />
         </Container>
       </section>
 

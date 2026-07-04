@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container, SectionHeading, AnchorButton, Card, WhatsAppIcon } from "@/components/ui";
 import { Icon } from "@/components/ui/icons";
 import { InquiryForm } from "@/components/forms/InquiryForm";
+import { OpenNow } from "@/components/ui/OpenNow";
 import { site, wa } from "@/lib/site";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -30,8 +31,11 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                 {site.address.street},<br />
                 {site.address.locality}, {site.address.city}, {site.address.state} — {site.address.pin}
               </p>
-              <p className="mt-2 flex items-center gap-1.5 text-sm text-ink-700/70">
-                <Icon name="clock" className="h-4 w-4" /> {t("contact.hours")}
+              <p className="mt-2 flex flex-wrap items-center gap-3 text-sm text-ink-700/70">
+                <span className="flex items-center gap-1.5">
+                  <Icon name="clock" className="h-4 w-4" /> {t("contact.hours")}
+                </span>
+                <OpenNow openLabel="Open now" closedLabel="Closed now" />
               </p>
             </Card>
             <div className="flex flex-wrap gap-3">

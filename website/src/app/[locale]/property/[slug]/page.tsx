@@ -31,6 +31,16 @@ export default async function ListingPage({ params }: { params: Promise<{ locale
   const description = locale === "gu" && listing.descriptionGu ? listing.descriptionGu : listing.description;
   const waMsg = `${t("property.waListing")}${listing.title} (${listing.locality}) — ${site.url}/property/${listing.slug}`;
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: site.name, item: site.url },
+      { "@type": "ListItem", position: 2, name: "Property", item: `${site.url}/property` },
+      { "@type": "ListItem", position: 3, name: listing.title },
+    ],
+  };
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -48,6 +58,7 @@ export default async function ListingPage({ params }: { params: Promise<{ locale
   return (
     <section className="py-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <Container className="grid gap-10 lg:grid-cols-[1.5fr_1fr]">
         <div>
           <div className="flex flex-wrap items-center gap-3">
